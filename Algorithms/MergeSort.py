@@ -1,71 +1,43 @@
-def mergeSort(arr):
+def mergeSort(myList):
+    if len(myList) > 1:
+        mid = len(myList) // 2
+        left = myList[:mid]
+        right = myList[mid:]
 
-    if len(arr) > 1:
+        # Recursive call on each half
+        mergeSort(left)
+        mergeSort(right)
 
-        a = len(arr)//2
-
-        l = arr[:a]
-
-        r = arr[a:]
-
-        # Sort the two halves
-
-        mergeSort(l)
-
-        mergeSort(r) 
-
-        b = c = d = 0
-
-        while b < len(l) and c < len(r):
-
-            if l[b] < r[c]:
-
-                arr[d] = l[b]
-
-                b += 1
-
+        # Two iterators for traversing the two halves
+        i = 0
+        j = 0
+        
+        # Iterator for the main list
+        k = 0
+        
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+              # The value from the left half has been used
+              myList[k] = left[i]
+              # Move the iterator forward
+              i += 1
             else:
+                myList[k] = right[j]
+                j += 1
+            # Move to the next slot
+            k += 1
 
-                arr[d] = r[c]
+        # For all the remaining values
+        while i < len(left):
+            myList[k] = left[i]
+            i += 1
+            k += 1
 
-                c += 1
+        while j < len(right):
+            myList[k]=right[j]
+            j += 1
+            k += 1
 
-            d += 1
-
-        while b < len(l):
-
-            arr[d] = l[b]
-
-            b += 1
-
-            d += 1
-
-        while c < len(r):
-
-            arr[d] = r[c]
-
-            c += 1
-
-            d += 1
-
-
-def printList(arr):
-
-    for i in range(len(arr)):
-
-        print(arr[i], end=" ")
-
-    print()
- 
-
-# Driver program
-
-if __name__ == '__main__':
-
-    arr = [0,1,3,5,7,9,2,4,6,8] 
-
-    mergeSort(arr) 
-
-    print("Sorted array is: ")
-
-    printList(arr)
+myList = [54,26,93,17,77,31,44,55,20]
+mergeSort(myList)
+print(myList)
